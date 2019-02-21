@@ -1,0 +1,32 @@
+doctype html
+html 
+    head
+        meta(charset='utf-8')
+        title To Do List
+        link(rel='stylesheet',type="text/css",href="/style.css")
+    
+    body
+        .container
+            p 
+                h2 A Simple To Do List App
+            //-Make sure to indent the input or button. Or it would be outside of the nested form tags
+            form(action='/addtask',method='post')
+                input(type='text',name='newtask',placeholder="add new task") 
+                button Add Task
+                button(type="reset") Reset
+             
+                h2 Added Task  
+                ul
+                    each val in task
+                        li 
+                            input(type="checkbox",name="check",value=`${val}`)
+                            label(for=`${val}`) #{val}
+                |
+                h2 
+                |
+                button(formaction='/completedtask',action='submit') Remove
+            p
+                h2 Completed Tasks
+                ul
+                    each val in completed
+                        li #{val}
