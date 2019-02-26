@@ -1,5 +1,5 @@
 const db = require('../db');
-//const bodyParser = require('body-parser');
+
 
 const todo = {
     async addTask(req,res) {
@@ -17,15 +17,23 @@ const todo = {
     },
 
     async getAllTasks(req,res){
-        const getListQuery = "SELECT task FROM list WHERE completed = 'N'";
-        const getCompletedListQuery = "SELECT task FROM list WHERE completed = 'Y'";
+        const getListQuery ={
+            text: "SELECT task FROM list WHERE completed = 'N'",
+            rowMode: 'array'
+        };
+        const getCompletedListQuery = {
+            text: "SELECT task FROM list WHERE completed = 'Y'",
+            rowMode: 'array'
+        } 
+
         try{
             const task = await db.query(getListQuery);
             const completed = await db.query(getCompletedListQuery);
-            console.log(task);
-            console.log(completed);
-            res.render('index',{task:task.result.rows,completed:completed.result.rows});
+            
+            res.render('index',{task:task.rows,completed:completed.rows});
+
         }catch(error){
+            console.log(error);
             return res.status(400).send(error);
         }
     }
