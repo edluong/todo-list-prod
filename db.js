@@ -31,7 +31,35 @@ const now = () => pool.query('SELECT NOW()')
     })
     .catch((err) =>{
         console.log(err);
-        poolend();
+        pool.end();
+    })
+
+//delete non-default tasks the settings of the project
+const delNonDefault = () => pool.query("DELETE FROM list WHERE task not in ('learn nodejs','finish react tutorial')")
+    .then((res) =>{
+        console.log(res);
+        pool.end();
+    })
+    .catch((err) =>{
+        pool.end();
+    })
+
+const updateDefault = () => pool.query("UPDATE list SET completed='N' WHERE task in ('learn nodejs','finish react tutorial')")
+    .then((res) =>{
+        console.log(res);
+        pool.end();
+    })
+    .catch((err) =>{
+        pool.end();
+    })
+
+const showTasks = () => pool.query("SELECT * FROM list")
+    .then((res) =>{
+        console.log(res.rows);
+        pool.end();
+    })
+    .catch((err) =>{
+        pool.end();
     })
 
 
@@ -42,8 +70,10 @@ pool.on('remove', () =>{
 
 
 module.exports = {
-    now
+    now,
+    delNonDefault,
+    showTasks,
+    updateDefault
 };
-
 
 require('make-runnable');
