@@ -11,9 +11,9 @@ html
                 h2 A Simple To Do List App
             //-Make sure to indent the input or button. Or it would be outside of the nested form tags
             form(action='/addtask',method='post')
-                input(type='text',name='newtask',placeholder="add new task") 
+                input(type='text',name='newtask',placeholder="Add New Task") 
                 button Add Task
-                button(type="reset") Reset
+                button(type="reset") Reset Task Field
              
                 h2 Added Task  
                 ul
@@ -24,7 +24,7 @@ html
                 |
                 h2 
                 |
-                button(formaction='/completedtask',action='submit') Remove
+                button(formaction='/completedtask',action='submit') Complete Task
             p
                 h2 Completed Tasks
                 ul

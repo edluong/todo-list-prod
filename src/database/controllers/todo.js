@@ -1,6 +1,5 @@
 const db = require('../db');
 
-
 const todo = {
     async addTask(req,res) {
         const text = 'INSERT INTO list(task) values($1)';
@@ -9,7 +8,7 @@ const todo = {
         ];
 
         try {
-            const {rows} = await db.query(text,values);
+            await db.query(text,values);
             return res.redirect('/');
         }catch(error){
             return res.status(400).send(error);
@@ -32,6 +31,26 @@ const todo = {
             
             res.render('index',{task:task.rows,completed:completed.rows});
 
+        }catch(error){
+            console.log(error);
+            return res.status(400).send(error);
+        }
+    },
+
+    async completeTask(req,res){
+
+        var completedTaskArr = [];
+        completedTaskArr.push(req.body.check);
+
+        const completeTaskQuery ={
+            text: "UPDATE list SET completed='Y' WHERE task = ANY ($1)",
+            values: completedTaskArr,
+            rowMode: 'array'
+        }
+        
+        try{
+            await db.query(completeTaskQuery,[completedTaskArr]);
+            res.redirect('/');
         }catch(error){
             console.log(error);
             return res.status(400).send(error);
