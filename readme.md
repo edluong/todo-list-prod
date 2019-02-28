@@ -1,6 +1,6 @@
 # To Do List App
 
-[[https://github.com/edluong/todo-list-prod/blob/master/public/img/demo.png|alt=demo]]
+![demo](https://github.com/edluong/todo-list-prod/blob/master/public/img/demo.png)
 
 # Technologies:
 
