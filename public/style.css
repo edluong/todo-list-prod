@@ -1,0 +1,35 @@
+body{
+    margin-top: 100px;
+    font-family:'Amaranth', sans-serif;
+    background: url(https://images.pexels.com/photos/265047/pexels-photo-265047.jpeg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+a{
+    text-decoration: none;
+    color: #000000;
+}
+a:hover{
+    font-size: 1.5em; 
+}
+
+
+li{
+    list-style: none;
+}
+
+/*container and subcontainer used to center everything */
+.container{
+    text-align: center;
+}
+
+.subcontainer{
+    display: inline-block;
+    margin: 0 auto;
+    height: 1000px;
+}
+
+.completed{
+    text-decoration:line-through;
+}
