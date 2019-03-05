@@ -23,17 +23,6 @@ pool.on('connect',() =>{
     console.log('connected to the db');
 });
 
-//get current time; test function to see how it works
-const now = () => pool.query('SELECT NOW()')
-    .then((res) =>{
-        console.log(res.rows[0].now);
-        pool.end();
-    })
-    .catch((err) =>{
-        console.log(err);
-        pool.end();
-    })
-
 //delete non-default tasks the settings of the project
 const delNonDefault = () => pool.query("DELETE FROM list WHERE task not in ('learn nodejs','finish react tutorial')")
     .then((res) =>{
@@ -70,7 +59,6 @@ pool.on('remove', () =>{
 
 
 module.exports = {
-    now,
     delNonDefault,
     showTasks,
     updateDefault
