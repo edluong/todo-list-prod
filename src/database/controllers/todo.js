@@ -1,8 +1,9 @@
 const db = require('../db');
+const queries = require('./queries');
 
 const todo = {
     async addTask(req,res) {
-        const text = 'INSERT INTO list(task) values($1)';
+        const text = queries.addTask;
         const values = [
             req.body.newtask
         ];
@@ -17,11 +18,11 @@ const todo = {
 
     async getAllTasks(req,res){
         const getListQuery ={
-            text: "SELECT task FROM list WHERE completed = 'N'",
+            text: queries.getListQuery,
             rowMode: 'array'
         };
         const getCompletedListQuery = {
-            text: "SELECT task FROM list WHERE completed = 'Y'",
+            text: queries.getCompletedListQuery,
             rowMode: 'array'
         } 
 
@@ -43,7 +44,7 @@ const todo = {
         completedTaskArr.push(req.body.check);
 
         const completeTaskQuery ={
-            text: "UPDATE list SET completed='Y' WHERE task = ANY ($1)",
+            text: queries.completeTaskQuery,
             values: completedTaskArr,
             rowMode: 'array'
         }
